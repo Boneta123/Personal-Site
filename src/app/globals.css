@@ -46,6 +46,15 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --animate-orbit: orbit calc(var(--duration)*1s) linear infinite;
+  @keyframes orbit {
+  0% {
+    transform: rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
+    }
+  100% {
+    transform: rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg));
+    }
+  }
 }
 
 :root {
@@ -117,6 +126,30 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* --- Anime accent layer -------------------------------------------------
+   Extends the shadcn tokens above rather than replacing them. Four accents,
+   each an original colour choice evoking a series' energy — no licensed art
+   or assets are used anywhere on this site.
+   ---------------------------------------------------------------------- */
+:root {
+  --cursed: oklch(0.62 0.28 300); /* violet */
+  --geass: oklch(0.6 0.26 25); /* crimson */
+  --gold: oklch(0.82 0.17 88); /* amber */
+  --mana: oklch(0.82 0.16 195); /* cyan */
+
+  --void: oklch(0.12 0.03 280);
+  --void-deep: oklch(0.08 0.02 285);
+}
+
+@theme inline {
+  --color-cursed: var(--cursed);
+  --color-geass: var(--geass);
+  --color-gold: var(--gold);
+  --color-mana: var(--mana);
+  --color-void: var(--void);
+  --color-void-deep: var(--void-deep);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -126,5 +159,97 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+@layer utilities {
+  /* Manga screentone: a halftone dot grid, drawn with a repeating gradient. */
+  .screentone {
+    background-image: radial-gradient(
+      currentColor 1px,
+      transparent 1.6px
+    );
+    background-size: 6px 6px;
+  }
+
+  /* Diagonal speed lines used behind section headers. */
+  .speedlines {
+    background-image: repeating-linear-gradient(
+      105deg,
+      transparent 0 3px,
+      currentColor 3px 4px,
+      transparent 4px 11px
+    );
+  }
+
+  .text-glow {
+    text-shadow:
+      0 0 12px color-mix(in oklch, currentColor 55%, transparent),
+      0 0 48px color-mix(in oklch, currentColor 25%, transparent);
+  }
+
+  /* Hides the scrollbar on the carousel rows while keeping them scrollable. */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes aura-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: translate3d(0, -4%, 0) scale(1.12);
+    opacity: 0.9;
+  }
+}
+
+@keyframes slash-sweep {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(320%) skewX(-18deg);
+  }
+}
+
+@keyframes glitch-shift {
+  0%,
+  100% {
+    clip-path: inset(0 0 0 0);
+    transform: translate3d(0, 0, 0);
+  }
+  20% {
+    clip-path: inset(18% 0 62% 0);
+    transform: translate3d(-3px, 0, 0);
+  }
+  40% {
+    clip-path: inset(70% 0 12% 0);
+    transform: translate3d(3px, 0, 0);
+  }
+  60% {
+    clip-path: inset(40% 0 40% 0);
+    transform: translate3d(-2px, 0, 0);
+  }
+  80% {
+    clip-path: inset(8% 0 78% 0);
+    transform: translate3d(2px, 0, 0);
+  }
+}
+
+/* Every decorative animation collapses to a static end state. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }
