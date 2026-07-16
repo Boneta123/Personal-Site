@@ -115,7 +115,7 @@ export function Hero() {
         className="pointer-events-none absolute inset-x-0 bottom-20 -z-0 border-y border-white/10 py-2 opacity-60 select-none"
       >
         <ScrollVelocity
-          texts={["FULL STACK · BACKEND · BINGHAMTON ·"]}
+          texts={["BINGHAMTON · SWE ·"]}
           velocity={40}
           numCopies={6}
           className="font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight text-white/70 sm:text-3xl"

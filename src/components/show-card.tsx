@@ -1,5 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 
+import { cardArt } from "@/content/art";
 import type { Show } from "@/content/site";
 import { cn } from "@/lib/utils";
 
@@ -11,12 +13,19 @@ const accentVar: Record<Show["accent"], string> = {
 };
 
 /**
- * A "show" poster: title plus its about blurb. The art is generated from the
- * card's own accent — gradient, screentone and a sigil built from the title's
- * initial — so no external or licensed imagery is needed.
+ * A "show" poster: title plus its about blurb.
+ *
+ * The poster header carries a public-domain woodblock print duotoned into the
+ * card's accent — luminosity for the print, a colour overlay to tint it, then
+ * the accent gradient on top so the row still reads as one system rather than
+ * five unrelated pictures. Cards without a print fall back to the gradient
+ * alone, which is what every card looked like before.
  */
 export function ShowCard({ show, index }: { show: Show; index: number }) {
   const accent = accentVar[show.accent];
+  const art = cardArt[show.id as keyof typeof cardArt] as
+    | (typeof cardArt)[keyof typeof cardArt]
+    | undefined;
 
   return (
     <article
@@ -36,10 +45,33 @@ export function ShowCard({ show, index }: { show: Show; index: number }) {
     >
       {/* Poster art */}
       <div className="relative h-44 overflow-hidden">
+        {art && (
+          <>
+            <Image
+              src={art.src}
+              alt=""
+              fill
+              // Real rendered widths — 384px at lg, 46vw at sm, 78vw on mobile.
+              sizes="(min-width: 1024px) 384px, (min-width: 640px) 46vw, 78vw"
+              className="object-cover opacity-70 mix-blend-luminosity"
+            />
+            {/* Duotone: tint the luminance-only print into the card's accent. */}
+            <div
+              aria-hidden
+              className="absolute inset-0 mix-blend-color"
+              style={{ background: accent }}
+            />
+          </>
+        )}
+
+        {/* Accent gradient. Lighter where a print sits under it, so the artwork
+            reads through instead of being painted over. */}
         <div
           className="absolute inset-0"
           style={{
-            background: `linear-gradient(135deg, color-mix(in oklch, var(--accent) 85%, transparent), color-mix(in oklch, var(--accent) 18%, transparent) 55%, transparent)`,
+            background: art
+              ? `linear-gradient(135deg, color-mix(in oklch, var(--accent) 55%, transparent), color-mix(in oklch, var(--accent) 12%, transparent) 60%, transparent)`
+              : `linear-gradient(135deg, color-mix(in oklch, var(--accent) 85%, transparent), color-mix(in oklch, var(--accent) 18%, transparent) 55%, transparent)`,
           }}
         />
         <div className="screentone absolute inset-0 text-black/25" />
@@ -48,10 +80,12 @@ export function ShowCard({ show, index }: { show: Show; index: number }) {
           className="speedlines absolute inset-0 text-white/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         />
 
-        {/* Rank sigil */}
+        {/* Rank sigil. white/15 read fine over a flat gradient but disappeared
+            once artwork went in behind it; the shadow anchors it against the
+            busiest parts of the print. */}
         <span
           aria-hidden
-          className="absolute -bottom-6 -left-2 font-[family-name:var(--font-display)] text-[7rem] leading-none text-white/15"
+          className="absolute -bottom-6 -left-2 font-[family-name:var(--font-display)] text-[7rem] leading-none text-white/30 [text-shadow:0_2px_18px_rgba(0,0,0,0.8)]"
         >
           {String(index + 1).padStart(2, "0")}
         </span>

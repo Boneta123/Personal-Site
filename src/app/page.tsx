@@ -8,8 +8,15 @@ import { SkillOrbit } from "@/components/skill-orbit";
 import { SiteNav } from "@/components/site-nav";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
-import { artworks } from "@/content/art";
+import { artworks, cardArt } from "@/content/art";
 import { experience, profile, projects, resume } from "@/content/site";
+
+const prints = [...Object.values(artworks), ...Object.values(cardArt)];
+
+// Listing all 12 as "artist, date" produced an unreadable run-on that repeated
+// the same four names. Credit the artists once each instead; per-artwork
+// provenance stays in src/content/art.ts.
+const artists = [...new Set(prints.map((p) => p.artist))].sort().join(", ");
 
 export default function Home() {
   return (
@@ -108,7 +115,8 @@ export default function Home() {
         </div>
 
         <p className="mx-auto mt-8 max-w-5xl text-xs leading-relaxed text-white/90">
-          Section textures are public-domain woodblock prints from the{" "}
+          The {prints.length} woodblock prints behind these sections and cards are
+          public domain, from the{" "}
           <a
             href="https://www.artic.edu/collection?is_public_domain=1"
             target="_blank"
@@ -117,11 +125,7 @@ export default function Home() {
           >
             Art Institute of Chicago
           </a>{" "}
-          open-access collection:{" "}
-          {Object.values(artworks)
-            .map((a) => `${a.artist}, ${a.date}`)
-            .join(" · ")}
-          .
+          open-access collection — {artists}.
         </p>
       </footer>
     </>
