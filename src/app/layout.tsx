@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Shippori_Mincho_B1 } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/content/site";
 
@@ -15,9 +15,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const display = Bebas_Neue({
+// Mincho: the high-contrast serif tradition the woodblock prints were lettered
+// in. subsets is latin-only on purpose — the japanese subset is megabytes and
+// every string on this site is Latin.
+const display = Shippori_Mincho_B1({
   variable: "--font-display",
-  weight: "400",
+  weight: ["600", "700", "800"],
   subsets: ["latin"],
 });
 

@@ -3,7 +3,10 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { ArtTexture } from "@/components/art-texture";
+import GlitchText from "@/components/GlitchText";
 import { ShowCard } from "@/components/show-card";
+import type { Artwork } from "@/content/art";
 import type { Show } from "@/content/site";
 
 type ShowRowProps = {
@@ -11,13 +14,24 @@ type ShowRowProps = {
   heading: string;
   kicker: string;
   shows: Show[];
+  /** Print bleeding in from the left. */
+  art?: Artwork;
+  /** Optional companion print on the right, to balance the row. */
+  artRight?: Artwork;
 };
 
 /**
  * A Crunchyroll-style browsing row: a horizontally scrollable rail of show
  * cards with arrow controls that appear only when there is somewhere to go.
  */
-export function ShowRow({ id, heading, kicker, shows }: ShowRowProps) {
+export function ShowRow({
+  id,
+  heading,
+  kicker,
+  shows,
+  art,
+  artRight,
+}: ShowRowProps) {
   const railRef = useRef<HTMLDivElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
@@ -43,14 +57,21 @@ export function ShowRow({ id, heading, kicker, shows }: ShowRowProps) {
   };
 
   return (
-    <section id={id} className="scroll-mt-24 py-14">
+    <section id={id} className="relative scroll-mt-24 overflow-hidden py-14">
+      {art && <ArtTexture art={art} side="left" opacity={0.4} />}
+      {artRight && (
+        <ArtTexture art={artRight} side="right" opacity={0.26} className="sm:w-2/5" />
+      )}
+
       <div className="mb-5 flex items-end justify-between gap-4 px-6 lg:px-12">
         <div>
-          <p className="text-xs font-semibold tracking-[0.28em] text-white/50 uppercase">
+          {/* Runs over the section print — anything under white/90 drops below
+              AA against the brightest paper in the artwork. */}
+          <p className="text-xs font-semibold tracking-[0.28em] text-white/90 uppercase">
             {kicker}
           </p>
-          <h2 className="relative mt-1 font-[family-name:var(--font-display)] text-4xl tracking-wide text-white sm:text-5xl">
-            {heading}
+          <h2 className="relative mt-1 font-[family-name:var(--font-display)] text-4xl font-bold tracking-tight text-white sm:text-5xl">
+            <GlitchText>{heading}</GlitchText>
             <span
               aria-hidden
               className="speedlines absolute top-1/2 -right-4 h-8 w-24 -translate-y-1/2 text-white/15"

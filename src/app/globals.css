@@ -55,7 +55,17 @@
     transform: rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg));
     }
   }
-}
+  --animate-meteor: meteor 5s linear infinite
+;
+  @keyframes meteor {
+  0% {
+    transform: rotate(var(--angle)) translateX(0);
+    opacity: 1;}
+  70% {
+    opacity: 1;}
+  100% {
+    transform: rotate(var(--angle)) translateX(-500px);
+    opacity: 0;}}}
 
 :root {
   --background: oklch(1 0 0);
@@ -127,18 +137,30 @@
 }
 
 /* --- Anime accent layer -------------------------------------------------
-   Extends the shadcn tokens above rather than replacing them. Four accents,
-   each an original colour choice evoking a series' energy — no licensed art
+   Extends the shadcn tokens above rather than replacing them. No licensed art
    or assets are used anywhere on this site.
+
+   The palette deliberately contains NO purple. Pink and purple are neighbours
+   on the wheel, so the pinks below stop at hue 345 — well clear of the 260–330
+   purple arc. Do not push any hue into that range.
+
+   --cursed and --gold keep their names for the sake of their consumers; their
+   values are now pink and blush rather than violet and amber.
    ---------------------------------------------------------------------- */
 :root {
-  --cursed: oklch(0.62 0.28 300); /* violet */
-  --geass: oklch(0.6 0.26 25); /* crimson */
-  --gold: oklch(0.82 0.17 88); /* amber */
+  /* A rose ramp — crimson → hot pink → blush — with cyan as the cold
+     counterpoint. Red and pink occupy a narrow hue band, so these separate on
+     LIGHTNESS (0.55 / 0.70 / 0.82) rather than hue, which is what keeps them
+     legible as three distinct accents. */
+  --geass: oklch(0.55 0.25 20); /* crimson */
+  --cursed: oklch(0.7 0.25 355); /* hot pink */
+  --gold: oklch(0.82 0.15 10); /* blush */
   --mana: oklch(0.82 0.16 195); /* cyan */
 
-  --void: oklch(0.12 0.03 280);
-  --void-deep: oklch(0.08 0.02 285);
+  /* Rose-tinted near-black, following the accents. (Was hue 280 originally,
+     which cast the whole page purple.) */
+  --void: oklch(0.13 0.018 12);
+  --void-deep: oklch(0.08 0.012 12);
 }
 
 @theme inline {
@@ -148,6 +170,35 @@
   --color-mana: var(--mana);
   --color-void: var(--void);
   --color-void-deep: var(--void-deep);
+
+  /* Drives GlitchText. The registry component ships these as a Tailwind v3
+     `tailwind.config.js` block, which this v4 project ignores — without them
+     the glitch classes resolve to nothing and the effect silently no-ops. */
+  --animate-glitch-after: glitch var(--after-duration) infinite linear
+    alternate-reverse;
+  --animate-glitch-before: glitch var(--before-duration) infinite linear
+    alternate-reverse;
+
+  @keyframes glitch {
+    0% {
+      clip-path: inset(20% 0 50% 0);
+    }
+    20% {
+      clip-path: inset(30% 0 40% 0);
+    }
+    40% {
+      clip-path: inset(10% 0 60% 0);
+    }
+    60% {
+      clip-path: inset(40% 0 20% 0);
+    }
+    80% {
+      clip-path: inset(15% 0 55% 0);
+    }
+    100% {
+      clip-path: inset(25% 0 35% 0);
+    }
+  }
 }
 
 @layer base {
@@ -251,5 +302,14 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* The rule above only freezes the glitch mid-clip, which leaves a stray band
+     of duplicated text sitting next to the real glyphs. Remove the split
+     entirely instead. */
+  [data-text]::before,
+  [data-text]::after {
+    content: none !important;
+    opacity: 0 !important;
   }
 }

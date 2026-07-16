@@ -1,6 +1,11 @@
 import { ArrowDown, FileText, Mail } from "lucide-react";
 
+import { ArtTexture } from "@/components/art-texture";
+import GlitchText from "@/components/GlitchText";
 import { Reveal } from "@/components/reveal";
+import ScrollVelocity from "@/components/ScrollVelocity";
+import { GlareHover } from "@/components/ui/glare-hover";
+import { artworks } from "@/content/art";
 import { profile, resume } from "@/content/site";
 import { brandIcons } from "@/lib/brand-icons";
 
@@ -23,7 +28,14 @@ function SocialIcon({ label }: { label: string }) {
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-svh flex-col justify-center px-6 py-24 lg:px-12">
+    <section className="relative flex min-h-svh flex-col justify-center overflow-hidden px-6 py-24 lg:px-12">
+      {/* Two prints: the wave dominates the right, the storm sits behind the copy
+          on the left at a much lower weight. Both run full-height — cropping one
+          to h-2/3 leaves a hard horizontal seam where the layer ends, since the
+          mask only fades horizontally. */}
+      <ArtTexture art={artworks.hero} side="right" opacity={0.5} priority />
+      <ArtTexture art={artworks.heroStorm} side="left" opacity={0.12} />
+
       {/* Vertical rail marking the hero, in the manner of a title card. */}
       <div
         aria-hidden
@@ -38,9 +50,10 @@ export function Hero() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <h1 className="mt-4 font-[family-name:var(--font-display)] text-6xl leading-[0.9] tracking-wide text-white sm:text-8xl lg:text-9xl">
-            <span className="block text-glow text-cursed">Michael</span>
-            <span className="block text-glow text-gold">Boneta</span>
+          <h1 className="mt-4 font-[family-name:var(--font-display)] text-6xl leading-[0.95] font-extrabold tracking-tight text-white sm:text-8xl lg:text-9xl">
+            {/* Each line glitches independently under the cursor. */}
+            <GlitchText className="block text-glow text-cursed">Michael</GlitchText>
+            <GlitchText className="block text-glow text-gold">Boneta</GlitchText>
           </h1>
         </Reveal>
 
@@ -58,15 +71,25 @@ export function Hero() {
 
         <Reveal delay={0.32}>
           <div className="mt-10 flex flex-wrap gap-3">
-            <a
-              href={resume.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 rounded-full border border-gold bg-gold/15 px-5 py-2.5 text-sm font-semibold text-gold transition hover:bg-gold/25 hover:shadow-[0_0_24px_var(--gold)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            {/* background="transparent" is required: the registry default is
+                #000, which would paint a black box behind the pill. */}
+            <GlareHover
+              background="transparent"
+              color="#ffffff"
+              opacity={0.35}
+              duration={700}
+              className="rounded-full"
             >
-              <FileText className="size-4" />
-              {resume.label}
-            </a>
+              <a
+                href={resume.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 rounded-full border border-gold bg-gold/15 px-5 py-2.5 text-sm font-semibold text-gold transition hover:bg-gold/25 hover:shadow-[0_0_24px_var(--gold)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+              >
+                <FileText className="size-4" />
+                {resume.label}
+              </a>
+            </GlareHover>
 
             {profile.socials.map((social) => (
               <a
@@ -82,6 +105,21 @@ export function Hero() {
             ))}
           </div>
         </Reveal>
+      </div>
+
+      {/* Scroll-reactive ticker: speed and direction track scroll velocity, so
+          the band lurches as you move down the page. Decorative and duplicated
+          six times over, so it's hidden from the a11y tree. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-20 -z-0 border-y border-white/10 py-2 opacity-60 select-none"
+      >
+        <ScrollVelocity
+          texts={["FULL STACK · BACKEND · BINGHAMTON ·"]}
+          velocity={40}
+          numCopies={6}
+          className="font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight text-white/70 sm:text-3xl"
+        />
       </div>
 
       <a

@@ -38,7 +38,7 @@ export type SkillIcon =
   | "javascript"
   | "springboot"
   | "react"
-  | "nextdotjs"
+  | "express"
   | "nodedotjs"
   | "mysql"
   | "git"
@@ -150,7 +150,7 @@ export const skills: Skill[] = [
   { id: "skill-js", name: "JavaScript", category: "Languages", icon: "javascript" },
   { id: "skill-spring", name: "Spring Boot", category: "Frameworks", icon: "springboot" },
   { id: "skill-react", name: "React", category: "Frameworks", icon: "react" },
-  { id: "skill-next", name: "Next.js", category: "Frameworks", icon: "nextdotjs" },
+  { id: "skill-express", name: "Express.js", category: "Frameworks", icon: "express" },
   { id: "skill-node", name: "Node", category: "Frameworks", icon: "nodedotjs" },
   { id: "skill-mysql", name: "MySQL", category: "Databases", icon: "mysql" },
   { id: "skill-git", name: "Git", category: "Tools", icon: "git" },

@@ -23,7 +23,10 @@ export function ShowCard({ show, index }: { show: Show; index: number }) {
       style={{ ["--accent" as string]: accent }}
       className={cn(
         "group relative flex w-[78vw] shrink-0 snap-start flex-col overflow-hidden rounded-xl",
-        "border border-white/10 bg-white/[0.03] backdrop-blur-sm",
+        // An opaque-enough substrate: the woodblock prints now run bright behind
+        // these cards, and a 3% white fill left the body copy sitting directly
+        // on the artwork.
+        "border border-white/10 bg-void-deep/80 backdrop-blur-md",
         "transition-[transform,border-color,box-shadow] duration-300 ease-out",
         "hover:-translate-y-2 hover:border-[var(--accent)]/70",
         "hover:shadow-[0_0_0_1px_var(--accent),0_18px_50px_-12px_var(--accent)]",
@@ -65,7 +68,7 @@ export function ShowCard({ show, index }: { show: Show; index: number }) {
 
       <div className="flex flex-1 flex-col gap-3 p-5">
         <div>
-          <h3 className="font-[family-name:var(--font-display)] text-2xl tracking-wide text-white">
+          <h3 className="font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight text-white">
             {show.title}
           </h3>
 
