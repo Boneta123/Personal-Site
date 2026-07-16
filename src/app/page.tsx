@@ -30,7 +30,7 @@ export default function Home() {
 
         <ShowRow
           id="projects"
-          kicker="Now streaming"
+          kicker="What I've built"
           heading="Projects"
           shows={projects}
           art={artworks.projects}
@@ -39,7 +39,7 @@ export default function Home() {
 
         <ShowRow
           id="experience"
-          kicker="Currently airing"
+          kicker="Who I've worked with"
           heading="Experience"
           shows={experience}
           art={artworks.experience}
