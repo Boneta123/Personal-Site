@@ -5,6 +5,7 @@ import { useState } from "react";
 import { OrbitingCircles } from "@/components/ui/orbiting-circles";
 import { skills } from "@/content/site";
 import { skillIcons } from "@/lib/skill-icons";
+import { cn } from "@/lib/utils";
 import type { Skill } from "@/content/site";
 
 type SkillMarkProps = {
@@ -43,6 +44,21 @@ function SkillMark({ skill, size, onActivate }: SkillMarkProps) {
 }
 
 /**
+ * Step the core label down as the name gets longer.
+ *
+ * The display face is Shippori Mincho — a wide serif. At one fixed size the
+ * longer names ("Spring Boot", "JavaScript", "Express.js") overrun the core
+ * disc, and the widest tracking makes it worse, so tracking tightens in step
+ * with the size.
+ */
+function coreTypeScale(label: string) {
+  const n = label.length;
+  if (n <= 6) return "text-2xl tracking-widest sm:text-3xl";
+  if (n <= 9) return "text-xl tracking-wide sm:text-2xl";
+  return "text-base tracking-tight sm:text-lg";
+}
+
+/**
  * The skills constellation: two counter-rotating rings of technology marks.
  * Languages orbit the inner ring, everything else the outer.
  *
@@ -57,6 +73,7 @@ export function SkillOrbit() {
   const outer = skills.filter((s) => s.category !== "Languages");
 
   const accent = active ? skillIcons[active.icon].color : undefined;
+  const label = active ? active.name : "STACK";
 
   return (
     <div className="relative mx-auto grid h-[30rem] w-full max-w-3xl place-items-center sm:h-[34rem]">
@@ -83,10 +100,13 @@ export function SkillOrbit() {
           // aria-live is deliberate: the label is the only textual output of the
           // hover, so a screen reader driving focus round the ring should hear it.
           aria-live="polite"
-          className="relative max-w-[8.5rem] font-[family-name:var(--font-display)] text-2xl leading-none tracking-widest text-white text-glow transition-colors duration-200 sm:max-w-[9.5rem] sm:text-3xl"
+          className={cn(
+            "relative max-w-[8.5rem] font-[family-name:var(--font-display)] leading-none text-white text-glow transition-colors duration-200 sm:max-w-[9.5rem]",
+            coreTypeScale(label),
+          )}
           style={active ? { color: accent } : undefined}
         >
-          {active ? active.name : "STACK"}
+          {label}
         </p>
       </div>
 
