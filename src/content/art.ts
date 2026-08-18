@@ -114,6 +114,17 @@ export const cardArt = {
     date: "1886",
     source: "https://www.artic.edu/artworks/197414",
   },
+  // Mariko's station was known for one dish — tororo-jiru — so the print is
+  // travelers stopped at a roadside food shop, which is the app. Same Hiroshige
+  // Tokaido series as job-1 below, but a different station and a different
+  // block: the no-repeat rule is per row, and these two sit in separate rows.
+  "project-delta": {
+    src: "/art/card-mariko-teahouse.jpg",
+    title: 'Mariko, from the series "Fifty-three Stations of the Tokaido"',
+    artist: "Utagawa Hiroshige",
+    date: "c. 1837/42",
+    source: "https://www.artic.edu/artworks/4336",
+  },
   "job-1": {
     src: "/art/card-tenryu-ferries.jpg",
     title:

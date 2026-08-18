@@ -4,8 +4,10 @@
  * content: if a fact is not in this file, it does not belong on the page.
  *
  * Where the two sources disagree, the resume wins — it is the more recent of
- * the two. The skills list in particular comes from the resume, which does not
- * claim TypeScript or PostgreSQL.
+ * the two. The skills list in particular comes from the resume's Technical
+ * Skills section, which does not claim TypeScript or PostgreSQL — even though
+ * the Calendericious project below is built on both. Tags describe a project;
+ * the skills list is its own claim, so the two are kept separate.
  */
 
 export type Social = {
@@ -110,6 +112,19 @@ export const projects: Show[] = [
     links: [],
     accent: "gold",
   },
+  {
+    id: "project-delta",
+    title: "Calendericious",
+    about:
+      "A crowdsourced calendar of day- and time-specific restaurant deals across a catalog of national chains, built as a full-stack mobile app.",
+    role: "Team Leader",
+    // The only ongoing project on the resume; the others all have end dates.
+    period: "June 2026 — Ongoing",
+    metric: "175+ national chains cataloged",
+    tags: ["React Native/Expo", "TypeScript", "Express", "Prisma", "Supabase"],
+    links: [],
+    accent: "geass",
+  },
 ];
 
 export const experience: Show[] = [
@@ -147,10 +162,25 @@ export const skills: Skill[] = [
   { id: "skill-py", name: "Python", category: "Languages", icon: "python" },
   { id: "skill-java", name: "Java", category: "Languages", icon: "openjdk" },
   { id: "skill-c", name: "C", category: "Languages", icon: "c" },
-  { id: "skill-js", name: "JavaScript", category: "Languages", icon: "javascript" },
-  { id: "skill-spring", name: "Spring Boot", category: "Frameworks", icon: "springboot" },
+  {
+    id: "skill-js",
+    name: "JavaScript",
+    category: "Languages",
+    icon: "javascript",
+  },
+  {
+    id: "skill-spring",
+    name: "Spring Boot",
+    category: "Frameworks",
+    icon: "springboot",
+  },
   { id: "skill-react", name: "React", category: "Frameworks", icon: "react" },
-  { id: "skill-express", name: "Express.js", category: "Frameworks", icon: "express" },
+  {
+    id: "skill-express",
+    name: "Express.js",
+    category: "Frameworks",
+    icon: "express",
+  },
   { id: "skill-node", name: "Node", category: "Frameworks", icon: "nodedotjs" },
   { id: "skill-mysql", name: "MySQL", category: "Databases", icon: "mysql" },
   { id: "skill-git", name: "Git", category: "Tools", icon: "git" },
