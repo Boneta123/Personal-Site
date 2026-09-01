@@ -1,6 +1,6 @@
 /**
  * Every string rendered on this site originates here, transcribed from
- * michaelboneta.com and Boneta_Michael_Resume_MostUpdated.pdf. Do not invent
+ * michaelboneta.com and csResume.pdf. Do not invent
  * content: if a fact is not in this file, it does not belong on the page.
  *
  * Where the two sources disagree, the resume wins — it is the more recent of
@@ -189,6 +189,6 @@ export const skills: Skill[] = [
 
 /** Served from /public so the Resources link can open it directly. */
 export const resume = {
-  href: "/Boneta_Michael_Resume_MostUpdated.pdf",
+  href: "/csResume.pdf",
   label: "Resume",
 };
