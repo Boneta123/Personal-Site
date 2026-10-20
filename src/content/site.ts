@@ -76,8 +76,7 @@ export const projects: Show[] = [
     about:
       "A crowdsourced calendar of day- and time-specific restaurant deals across a catalog of national chains, built as a full-stack mobile app.",
     role: "Team Leader",
-    // The only ongoing project on the resume; the others all have end dates.
-    period: "June 2026 — Ongoing",
+    period: "June 2026 — September 2026",
     metric: "175+ national chains cataloged",
     tags: ["React Native/Expo", "TypeScript", "Express", "Prisma", "Supabase"],
     links: [
