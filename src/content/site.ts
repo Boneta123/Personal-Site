@@ -71,6 +71,41 @@ export const profile = {
 
 export const projects: Show[] = [
   {
+    id: "project-delta",
+    title: "Calendericious",
+    about:
+      "A crowdsourced calendar of day- and time-specific restaurant deals across a catalog of national chains, built as a full-stack mobile app.",
+    role: "Team Leader",
+    // The only ongoing project on the resume; the others all have end dates.
+    period: "June 2026 — Ongoing",
+    metric: "175+ national chains cataloged",
+    tags: ["React Native/Expo", "TypeScript", "Express", "Prisma", "Supabase"],
+    links: [
+      { label: "GitHub", url: "https://github.com/Boneta123/calendericious" },
+    ],
+    accent: "geass",
+  },
+  {
+    id: "project-epsilon",
+    title: "SiteLine",
+    about:
+      "A full-stack AI tool that triages clinical trial contract redlines against a rules-based playbook, with an agent that searches signed agreements to inform each new negotiation.",
+    role: "Full Stack Developer · HackHarvard 2026 Healthcare Track Winner",
+    // Period is the resume's own date ("Oct 2025"), even though the repo and
+    // resume title both say HackHarvard 2026.
+    period: "October 2025",
+    metric: "Unsafe approvals cut from 2.6% to 0%",
+    tags: ["React", "FastAPI", "OpenAI API", "Supabase", "AWS S3"],
+    links: [
+      { label: "GitHub", url: "https://github.com/duna-akin/SiteLine" },
+      {
+        label: "Devpost",
+        url: "https://devpost.com/software/siteline-90rxwp",
+      },
+    ],
+    accent: "mana",
+  },
+  {
     id: "project-alpha",
     title: "WikiPedia Word Hunt",
     about:
@@ -111,19 +146,6 @@ export const projects: Show[] = [
     tags: ["Python"],
     links: [],
     accent: "gold",
-  },
-  {
-    id: "project-delta",
-    title: "Calendericious",
-    about:
-      "A crowdsourced calendar of day- and time-specific restaurant deals across a catalog of national chains, built as a full-stack mobile app.",
-    role: "Team Leader",
-    // The only ongoing project on the resume; the others all have end dates.
-    period: "June 2026 — Ongoing",
-    metric: "175+ national chains cataloged",
-    tags: ["React Native/Expo", "TypeScript", "Express", "Prisma", "Supabase"],
-    links: [],
-    accent: "geass",
   },
 ];
 

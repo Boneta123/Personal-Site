@@ -125,6 +125,16 @@ export const cardArt = {
     date: "c. 1837/42",
     source: "https://www.artic.edu/artworks/4336",
   },
+  // Two courtiers reading a letter together — the app reads a redlined contract
+  // and decides what to do with it. A c. 1688 black-ink (sumizuri-e) print, so
+  // it is the only card here with no colour of its own for the duotone to fight.
+  "project-epsilon": {
+    src: "/art/card-reading-a-letter.jpg",
+    title: "Reading a Letter",
+    artist: "Furuyama Moroshige",
+    date: "c. 1688",
+    source: "https://www.artic.edu/artworks/19023",
+  },
   "job-1": {
     src: "/art/card-tenryu-ferries.jpg",
     title:
