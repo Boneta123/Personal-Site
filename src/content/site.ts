@@ -90,9 +90,7 @@ export const projects: Show[] = [
     about:
       "A full-stack AI tool that triages clinical trial contract redlines against a rules-based playbook, with an agent that searches signed agreements to inform each new negotiation.",
     role: "Full Stack Developer · HackHarvard 2026 Healthcare Track Winner",
-    // Period is the resume's own date ("Oct 2025"), even though the repo and
-    // resume title both say HackHarvard 2026.
-    period: "October 2025",
+    period: "October 2026",
     metric: "Unsafe approvals cut from 2.6% to 0%",
     tags: ["React", "FastAPI", "OpenAI API", "Supabase", "AWS S3"],
     links: [
