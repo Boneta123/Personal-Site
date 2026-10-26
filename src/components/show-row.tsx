@@ -18,6 +18,8 @@ type ShowRowProps = {
   art?: Artwork;
   /** Optional companion print on the right, to balance the row. */
   artRight?: Artwork;
+  /** Load the left print eagerly — for rows that sit near the top of the page. */
+  eagerArt?: boolean;
 };
 
 /**
@@ -31,6 +33,7 @@ export function ShowRow({
   shows,
   art,
   artRight,
+  eagerArt = false,
 }: ShowRowProps) {
   const railRef = useRef<HTMLDivElement>(null);
   const [atStart, setAtStart] = useState(true);
@@ -58,7 +61,14 @@ export function ShowRow({
 
   return (
     <section id={id} className="relative scroll-mt-24 overflow-hidden py-14">
-      {art && <ArtTexture art={art} side="left" opacity={0.4} />}
+      {art && (
+        <ArtTexture
+          art={art}
+          side="left"
+          opacity={0.4}
+          loading={eagerArt ? "eager" : undefined}
+        />
+      )}
       {artRight && (
         <ArtTexture art={artRight} side="right" opacity={0.26} className="sm:w-2/5" />
       )}

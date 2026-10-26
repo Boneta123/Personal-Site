@@ -90,6 +90,17 @@ export const artworks = {
  * three Great Waves), so these were de-duplicated by title, not just by id.
  */
 export const cardArt = {
+  // Villagers with both arms thrown up toward a figure in the air — a game you
+  // play by reaching with your hands. Same Kuniyoshi as project-alpha, a
+  // different series.
+  "project-zeta": {
+    src: "/art/card-dong-yong.jpg",
+    title:
+      'Dong Yong (Toei), from the series "Twenty-four Paragons of Filial Piety as a Mirror for Children (Nijushiko doji kagami)"',
+    artist: "Utagawa Kuniyoshi",
+    date: "c. 1843",
+    source: "https://www.artic.edu/artworks/7565",
+  },
   "project-alpha": {
     src: "/art/card-poems-akahito.jpg",
     title:

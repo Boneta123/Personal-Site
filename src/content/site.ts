@@ -71,6 +71,20 @@ export const profile = {
 
 export const projects: Show[] = [
   {
+    id: "project-zeta",
+    title: "Number Rush",
+    about:
+      "An AR-style math game where MediaPipe hand tracking reads your webcam feed in the browser, and a React Three Fiber scene renders the 3D action so you play with your bare hands.",
+    role: "CodeFest Binghamton",
+    period: "October 2026",
+    tags: ["React", "TypeScript", "Three.js", "MediaPipe"],
+    links: [
+      { label: "Live", url: "https://math-attack-three.vercel.app/" },
+      { label: "GitHub", url: "https://github.com/Boneta123/Math-Attack" },
+    ],
+    accent: "cursed",
+  },
+  {
     id: "project-delta",
     title: "Calendericious",
     about:

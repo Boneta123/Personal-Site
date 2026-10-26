@@ -35,6 +35,7 @@ export default function Home() {
           shows={projects}
           art={artworks.projects}
           artRight={artworks.brawl}
+          eagerArt
         />
 
         <ShowRow

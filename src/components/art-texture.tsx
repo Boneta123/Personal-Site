@@ -12,6 +12,8 @@ type ArtTextureProps = {
   opacity?: number;
   /** Set for above-the-fold art so it isn't lazy-loaded into the LCP window. */
   priority?: boolean;
+  /** Set "eager" for art that is visible on first paint but isn't the hero. */
+  loading?: "eager" | "lazy";
 };
 
 /**
@@ -31,6 +33,7 @@ export function ArtTexture({
   side = "right",
   opacity = 0.42,
   priority = false,
+  loading,
 }: ArtTextureProps) {
   // Two masks composited together. The horizontal one keeps the print off the
   // column where the copy lives; the vertical one stops it cutting off in a
@@ -72,6 +75,7 @@ export function ArtTexture({
         sizes="(max-width: 640px) 100vw, 60vw"
         className="object-cover mix-blend-luminosity"
         priority={priority}
+        loading={loading}
       />
       {/* Duotone: tint the luminance-only print into the rose palette. */}
       <div className="absolute inset-0 bg-gradient-to-br from-geass/60 via-cursed/40 to-gold/25 mix-blend-color" />
